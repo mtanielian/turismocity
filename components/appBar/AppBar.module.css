@@ -1,0 +1,42 @@
+.appBarColor {
+  background-color: #1d4d8b
+}
+
+.imgBrand {
+  width: auto; 
+  height: 50px
+}
+
+.menuItemLink {
+  text-decoration: none
+}
+
+.containerMenuBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around
+}
+
+.containerIconLogin {
+  display: flex;
+  justify-content: flex-end
+}
+
+.menuIconButton {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+}
+
+.iconLoginButton {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+}
+
+.avatar {
+  width: 30px; 
+  height: 30px
+}
