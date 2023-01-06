@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux'
+// import { AnyAction } from 'redux'
 import { 
   SET_FLIGHTS_OUTBOUND, SET_FLIGHTS_RETURN, SET_FLIGHT_OUTBOUND, 
   SET_FLIGHT_RETURN, SET_DATE_OUTBBOUND, SET_DATE_RETURN, 
@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   totalPassengers: 1,
   error: false
 }
-const formFlightReducer = (state = INITIAL_STATE, action: AnyAction) => {
+const formFlightReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
   case SET_TYPE_OF_TRIP:
     return {...state, typeOfTrip: action.payload}

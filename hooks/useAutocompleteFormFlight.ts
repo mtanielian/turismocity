@@ -16,7 +16,7 @@ const useAutocompleteFormFlight = ({ type } :Props ) => {
   const { flightsOutbound,  flightsReturn, flightOutbound, flightReturn } =  useAppSelector(state => state.formFlight)
 
   const laodFlights = async () => {
-    const data = await getFlights()
+    const data: Flight[] = await getFlights()
     dispatch(doSetFlightsOutbound(data))
   }
 
