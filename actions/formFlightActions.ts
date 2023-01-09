@@ -2,10 +2,10 @@ import { Dispatch } from 'react'
 import { 
   SET_FLIGHTS_OUTBOUND, SET_FLIGHTS_RETURN, SET_FLIGHT_OUTBOUND, 
   SET_FLIGHT_RETURN, SET_DATE_OUTBBOUND, SET_DATE_RETURN, 
-  SET_TYPE_OF_TRIP, SET_PASSENGERS
+  SET_TYPE_OF_TRIP, SET_PASSENGERS, SET_CONTINUE_FLIGHTS
 } from '../actionsTypes/types' 
 import { Flight } from '../ts-definitions/interfaces'
-import { TypeFlight } from '../ts-definitions/types'
+import { TypeFlight, TypeOfTrip } from '../ts-definitions/types'
 
 type ActionSetFlightsOutbound = | { type: typeof SET_FLIGHTS_OUTBOUND, payload: Flight[] }
 export const doSetFlightsOutbound = (flights: Flight[]) => (dispatch: Dispatch<ActionSetFlightsOutbound>) => {
@@ -24,8 +24,8 @@ export const doSetFlightsReturn = (flights: Flight[]) => (dispatch: Dispatch<Act
 }
 
 
-type ActionSetFlightOutbound = | { type: typeof SET_FLIGHT_OUTBOUND, payload: Flight }
-export const doSetFlightOutbound = (flight: Flight) => (dispatch: Dispatch<ActionSetFlightOutbound>) => {
+type ActionSetFlightOutbound = | { type: typeof SET_FLIGHT_OUTBOUND, payload: Flight | object }
+export const doSetFlightOutbound = (flight: Flight | object) => (dispatch: Dispatch<ActionSetFlightOutbound>) => {
   dispatch({
     type: SET_FLIGHT_OUTBOUND,
     payload: flight
@@ -41,8 +41,8 @@ export const doSetFlightReturn = (flight: Flight | object)=> (dispatch: Dispatch
   })
 }
 
-type ActionSetTypeOfTrip = | { type: typeof SET_TYPE_OF_TRIP, payload: TypeFlight }
-export const doSetTypeOfTrip = (typeOfTrip: TypeFlight) => (dispatch: Dispatch<ActionSetTypeOfTrip>) => {
+type ActionSetTypeOfTrip = | { type: typeof SET_TYPE_OF_TRIP, payload: TypeOfTrip }
+export const doSetTypeOfTrip = (typeOfTrip: TypeOfTrip) => (dispatch: Dispatch<ActionSetTypeOfTrip>) => {
   dispatch({
     type: SET_TYPE_OF_TRIP,
     payload: typeOfTrip
@@ -72,5 +72,13 @@ export const doSetPassengers = (passengers: object) => (dispatch: Dispatch<Actio
   dispatch({
     type: SET_PASSENGERS,
     payload: passengers
+  })
+}
+
+type ActionContinueFlights = | { type: typeof SET_CONTINUE_FLIGHTS, payload: boolean }
+export const doSeContinueFlights = (continueFlights: boolean) => (dispatch: Dispatch<ActionContinueFlights>) => {
+  dispatch({
+    type: SET_CONTINUE_FLIGHTS,
+    payload: continueFlights
   })
 }

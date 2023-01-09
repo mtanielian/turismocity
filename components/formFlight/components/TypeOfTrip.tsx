@@ -1,14 +1,16 @@
 import { FormControl, RadioGroup, FormControlLabel, Radio, Typography } from '@mui/material'
 import useTypeOfTrip from '../../../hooks/useTypeOfTrip'
+import { Trip } from '../../../ts-definitions/interfaces'
 
-
-const trips = [
+const trips: Trip[] = [
   {label: 'Ida y vuelta', value: 'ida_vuelta'},
-  {label: 'Solo ida', value: 'solo_ida'}
+  {label: 'Solo ida', value: 'solo_ida'},
+  {label: 'Por fechas', value: 'dates'}
+
 ]
 
 const TypeOfTrip = () => {
-  const {typeOfTrip, setTypeOfTrip} = useTypeOfTrip()
+  const {setTypeOfTrip} = useTypeOfTrip()
   
   return (
     <FormControl>
@@ -16,7 +18,7 @@ const TypeOfTrip = () => {
         name="radio-buttons-group"
         row
         onChange={(e) => setTypeOfTrip(e)}
-        value={typeOfTrip === '' ? trips[0].value : typeOfTrip }
+        
       >
         {trips.map( ({label, value}) =>
           <FormControlLabel 

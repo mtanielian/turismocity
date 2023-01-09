@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './useRedux'
 import { getFlightsReturn, getFlights } from '../services/flights.services'
 import { doSetFlightsOutbound, doSetFlightsReturn, doSetFlightOutbound, doSetFlightReturn } from '../actions/formFlightActions'
@@ -15,14 +15,15 @@ const useAutocompleteFormFlight = ({ type } :Props ) => {
   
   const { flightsOutbound,  flightsReturn, flightOutbound, flightReturn } =  useAppSelector(state => state.formFlight)
 
+
   const laodFlights = async () => {
     const data: Flight[] = await getFlights()
     dispatch(doSetFlightsOutbound(data))
   }
 
   const loadFlightsReturn = async () => { 
-    doSetFlightsReturn([])
-    doSetFlightReturn({})
+    dispatch(doSetFlightsReturn([]))
+    dispatch(doSetFlightReturn({}))
     if(flightOutbound) {
       const { origin, destination, date } = flightOutbound
       const data = await getFlightsReturn({ origin, destination, date })
@@ -30,15 +31,31 @@ const useAutocompleteFormFlight = ({ type } :Props ) => {
     }
   }
 
+
+
+  
   useEffect(() => {
-    laodFlights()
+    if (type === 'outbound') {
+      laodFlights()
+    }
   }, [])
 
   useEffect(() => {
-    loadFlightsReturn()
+    if (type === 'return' ) {
+      loadFlightsReturn()
+    }
   } ,[flightOutbound])
 
-  const setFlight = (flight: Flight) => {
+
+  useEffect(() => {
+    return () => {
+      setFlight({})
+    }
+  }, [])
+
+  
+  const setFlight = (flight: Flight | object) => {
+    console.log('setFlight')
     if (type === 'outbound') {
       dispatch(doSetFlightOutbound(flight))
     }
@@ -62,6 +79,8 @@ const useAutocompleteFormFlight = ({ type } :Props ) => {
     setFlight
   }
   
+  
+
 }
 
 export default useAutocompleteFormFlight

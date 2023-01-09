@@ -2,11 +2,11 @@
 import { 
   SET_FLIGHTS_OUTBOUND, SET_FLIGHTS_RETURN, SET_FLIGHT_OUTBOUND, 
   SET_FLIGHT_RETURN, SET_DATE_OUTBBOUND, SET_DATE_RETURN, 
-  SET_TYPE_OF_TRIP, SET_PASSENGERS
+  SET_TYPE_OF_TRIP, SET_PASSENGERS, SET_CONTINUE_FLIGHTS
 } from '../actionsTypes/types' 
 
 const INITIAL_STATE = {
-  typeOfTrip: 'ida_vuelta',
+  typeOfTrip: '',
   flightsOutbound: [],
   flightsReturn: [],
   flightOutbound: {},
@@ -19,7 +19,7 @@ const INITIAL_STATE = {
     child: 0
   },
   totalPassengers: 1,
-  error: false
+  continueFlights: false
 }
 const formFlightReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
@@ -43,6 +43,8 @@ const formFlightReducer = (state = INITIAL_STATE, action: any) => {
       passengers: action.payload, 
       totalPassengers: action.payload.adult + action.payload.teen + action.payload.child
     }
+  case SET_CONTINUE_FLIGHTS:
+    return {...state, continueFlights: action.payload}
   default:
     return state
   }

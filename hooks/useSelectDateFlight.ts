@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from './useRedux'
-import { doSetDateOutbound, doSetDateReturn } from '../actions/formFlightActions'
+import { doSetDateOutbound, doSetDateReturn, doSetFlightReturn, doSetFlightOutbound } from '../actions/formFlightActions'
 import { TypeFlight } from '../ts-definitions/types'
+import { useEffect } from 'react'
 
 interface Props {
   type: TypeFlight
@@ -12,12 +13,26 @@ const useSelectDateFlight = ({ type }: Props) => {
   const dispatch = useAppDispatch()
 
   const handleDateChange = (date: string) => {
+    dispatch(doSetFlightReturn({}))
+    dispatch(doSetFlightOutbound({}))
+    doSetFlightOutbound
     if (type === 'outbound') {
       dispatch(doSetDateOutbound(date))
     } else {
       dispatch(doSetDateReturn(date))
     }
   }
+
+
+  useEffect(() => {
+
+    return () => {
+      dispatch(doSetDateOutbound(''))
+      dispatch(doSetDateReturn(''))
+    }
+
+  }, [])
+
 
   if (type === 'outbound') {
     return {

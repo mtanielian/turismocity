@@ -28,13 +28,13 @@ interface PropsAutocompleteFormFlight {
 
 const AutocompleteFormFlight = ({ label, type }: PropsAutocompleteFormFlight) => {
   const { setFlight, flights } = useAutocompleteFormFlight({type})
-  
+
   return (
     <Autocomplete
       sx={{ width: '100%', '.MuiOutlinedInput-root': {background: 'white'}}}
       options={flights || []}
       autoHighlight
-      onChange={(event, flight) => {flight && Object.keys(flight).length > 0 ? setFlight(flight) : []}}
+      onChange={(event, flight) => {flight && Object.keys(flight).length > 0 ? setFlight(flight) : setFlight({})}}
       getOptionLabel={(flight: Flight) => getLabel(flight)}
       renderOption={(props, flight) => (
         <Item key={flight._id} props={props} flight={flight} />
